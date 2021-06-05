@@ -12,7 +12,7 @@
 #  index_concept_types_on_name  (name) UNIQUE
 #
 class ConceptType < ApplicationRecord
-    validate :name, persence: true, uniquiness: true
+    validates :name, presence: true, uniqueness: true
 
     has_many :concepts
 end

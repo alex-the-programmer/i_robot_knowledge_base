@@ -9,7 +9,7 @@
 #  updated_at :datetime         not null
 #
 class MLModel < ApplicationRecord
-    validate :name, persence: true
+    validates :name, presence: true
 
     has_one :concept
 end

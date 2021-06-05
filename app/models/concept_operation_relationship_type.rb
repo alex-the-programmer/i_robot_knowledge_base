@@ -12,5 +12,5 @@
 #  index_concept_operation_relationship_types_on_name  (name) UNIQUE
 #
 class ConceptOperationRelationshipType < ApplicationRecord
-    validate :name, presence: true, uniquiness: true
+    validates :name, presence: true, uniqueness: true
 end

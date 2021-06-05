@@ -20,7 +20,7 @@
 #  fk_rails_...  (ml_model_id => ml_models.id)
 #
 class Concept < ApplicationRecord
-    validate :name, persence: true
+    validates :name, presence: true
 
     belongs_to :concept_type
     belongs_to :ml_model
