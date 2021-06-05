@@ -14,6 +14,11 @@
 #  index_concepts_on_concept_type_id  (concept_type_id)
 #  index_concepts_on_ml_model_id      (ml_model_id)
 #
+# Foreign Keys
+#
+#  fk_rails_...  (concept_type_id => concept_types.id)
+#  fk_rails_...  (ml_model_id => ml_models.id)
+#
 class Concept < ApplicationRecord
     validate :name, persence: true
 
