@@ -10,9 +10,32 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 0) do
+ActiveRecord::Schema.define(version: 2021_06_05_050915) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "concept_types", force: :cascade do |t|
+    t.string "names", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "concepts", force: :cascade do |t|
+    t.string "name", null: false
+    t.bigint "concept_type_id", null: false
+    t.bigint "ml_model_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["concept_type_id"], name: "index_concepts_on_concept_type_id"
+    t.index ["ml_model_id"], name: "index_concepts_on_ml_model_id"
+  end
+
+  create_table "ml_models", force: :cascade do |t|
+    t.string "name", null: false
+    t.string "filename", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
 
 end
