@@ -14,6 +14,7 @@
 #  index_concept_relationships_on_child_concept_id              (child_concept_id)
 #  index_concept_relationships_on_concept_relationship_type_id  (concept_relationship_type_id)
 #  index_concept_relationships_on_parent_concept_id             (parent_concept_id)
+#  index_concept_relationships_unique                           (parent_concept_id,child_concept_id) UNIQUE
 #
 # Foreign Keys
 #

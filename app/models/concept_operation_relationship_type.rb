@@ -1,6 +1,6 @@
 # == Schema Information
 #
-# Table name: concept_relationship_types
+# Table name: concept_operation_relationship_types
 #
 #  id         :bigint           not null, primary key
 #  name       :string           not null
@@ -9,8 +9,8 @@
 #
 # Indexes
 #
-#  index_concept_relationship_types_on_name  (name) UNIQUE
+#  index_concept_operation_relationship_types_on_name  (name) UNIQUE
 #
-class ConceptRelationshipType < ApplicationRecord
+class ConceptOperationRelationshipType < ApplicationRecord
     validate :name, presence: true, uniquiness: true
 end

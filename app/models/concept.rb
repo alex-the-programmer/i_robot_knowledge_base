@@ -24,4 +24,7 @@ class Concept < ApplicationRecord
 
     belongs_to :concept_type
     belongs_to :ml_model
+
+    has_many :concept_operations
+    has_many :operations, through: :concept_operations
 end
