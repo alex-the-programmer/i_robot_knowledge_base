@@ -25,12 +25,18 @@ class Concept < ApplicationRecord
     belongs_to :concept_type, optional: true #consider removing concept types
     belongs_to :ml_model, optional: true # consider making required
 
-    has_many :child_concept_relationships, class_name: 'ConceptRelationship', foreign_key: :child_concept_id
+    has_many :child_concept_relationships, class_name: 'ConceptRelationship', foreign_key: :parent_concept_id
     has_many :child_concepts, through: :child_concept_relationships
 
-    has_many :parent_concept_relationships, class_name: 'ConceptRelationship', foreign_key: :parent_concept_id
+    has_many :parent_concept_relationships, class_name: 'ConceptRelationship', foreign_key: :child_concept_id
     has_many :parent_concepts, through: :parent_concept_relationships
 
     has_many :concept_operations
     has_many :operations, through: :concept_operations
+
+    def is?(concept)
+        return true if id == concept.id
+        return parent_concept_relationships.find_by(concept_relationship_type_id: 1).parent_concept.is?(concept) if parent_concept_relationships.any?
+        false
+    end
 end
