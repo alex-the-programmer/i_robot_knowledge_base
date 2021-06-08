@@ -6,10 +6,15 @@
 #  name       :string           not null
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
+#  concept_id :integer          default(1), not null
+#
+# Foreign Keys
+#
+#  fk_rails_...  (concept_id => concepts.id)
 #
 class Operation < ApplicationRecord
     validates :name, presence: true
 
-    has_many :concept_operations
-    has_many :concepts, through: :concept_operations
+    has_many :arguments
+    belongs_to :concept
 end

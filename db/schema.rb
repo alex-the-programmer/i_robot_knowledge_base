@@ -10,28 +10,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_06_06_002601) do
+ActiveRecord::Schema.define(version: 2021_06_08_061653) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "concept_operation_relationship_types", force: :cascade do |t|
-    t.string "name", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["name"], name: "index_concept_operation_relationship_types_on_name", unique: true
-  end
-
-  create_table "concept_operations", force: :cascade do |t|
-    t.bigint "concept_id", null: false
+  create_table "arguments", force: :cascade do |t|
     t.bigint "operation_id", null: false
-    t.bigint "concept_operation_relationship_type_id", null: false
+    t.string "name", null: false
+    t.bigint "base_concept_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["concept_id", "operation_id", "concept_operation_relationship_type_id"], name: "index_contept_operations_unique", unique: true
-    t.index ["concept_id"], name: "index_concept_operations_on_concept_id"
-    t.index ["concept_operation_relationship_type_id"], name: "index_concept_operations_on_c_o_r_t_id"
-    t.index ["operation_id"], name: "index_concept_operations_on_operation_id"
+    t.index ["base_concept_id"], name: "index_arguments_on_base_concept_id"
+    t.index ["operation_id"], name: "index_arguments_on_operation_id"
   end
 
   create_table "concept_relationship_types", force: :cascade do |t|
@@ -81,14 +72,15 @@ ActiveRecord::Schema.define(version: 2021_06_06_002601) do
     t.string "name", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "concept_id", default: 1, null: false
   end
 
-  add_foreign_key "concept_operations", "concept_operation_relationship_types"
-  add_foreign_key "concept_operations", "concepts"
-  add_foreign_key "concept_operations", "operations"
+  add_foreign_key "arguments", "concepts", column: "base_concept_id"
+  add_foreign_key "arguments", "operations"
   add_foreign_key "concept_relationships", "concept_relationship_types"
   add_foreign_key "concept_relationships", "concepts", column: "child_concept_id"
   add_foreign_key "concept_relationships", "concepts", column: "parent_concept_id"
   add_foreign_key "concepts", "concept_types"
   add_foreign_key "concepts", "ml_models"
+  add_foreign_key "operations", "concepts"
 end
