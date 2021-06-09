@@ -31,8 +31,7 @@ class Concept < ApplicationRecord
     has_many :parent_concept_relationships, class_name: 'ConceptRelationship', foreign_key: :child_concept_id
     has_many :parent_concepts, through: :parent_concept_relationships
 
-    has_many :concept_operations
-    has_many :operations, through: :concept_operations
+    has_many :operations
 
     def is?(concept)
         return true if id == concept.id
